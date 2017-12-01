@@ -11,11 +11,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class ExpensiveScenario implements AutoCloseable {
@@ -39,6 +37,16 @@ public class ExpensiveScenario implements AutoCloseable {
                 .newInstance()
                 .newDocumentBuilder()
                 .parse(result.getContent());
+
+        String instanceId = document
+                .getElementsByTagName("scenarioInstanceId")
+                .item(0)
+                .getTextContent();
+
+        String headerValue = document
+                .getElementsByTagName("scenarioHeaderValue")
+                .item(0)
+                .getTextContent();
     }
 
     @Override
